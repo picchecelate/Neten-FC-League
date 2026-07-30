@@ -101,37 +101,37 @@ export const MatchModal: React.FC<MatchModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#0A0C10]/80 backdrop-blur-sm animate-fadeIn">
-      <div className="bg-[#14171D] border border-slate-800/80 rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-fadeIn">
+      <div className="bg-white border border-slate-200 rounded-2xl max-w-lg w-full overflow-hidden shadow-xl">
         
         {/* Modal Header */}
-        <div className="px-6 py-5 bg-[#0A0C10] border-b border-slate-800/80 flex items-center justify-between">
+        <div className="px-6 py-5 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="p-2.5 rounded-xl bg-blue-600/10 text-blue-400 border border-blue-500/30">
+            <div className="p-2.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200">
               <Swords className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="text-lg font-bold text-white tracking-tight">Registra Risultato Partita</h3>
-              <p className="text-xs font-mono text-slate-500">FC 2026 Neten League</p>
+              <h3 className="text-lg font-black text-slate-900 tracking-tight font-mono">Registra Risultato Partita</h3>
+              <p className="text-xs font-mono text-slate-500 font-bold">EA SPORTS FC 2026 Neten League</p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+            className="p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Tab Selection */}
-        <div className="grid grid-cols-2 p-2 bg-[#0A0C10]/60 border-b border-slate-800/80 text-sm font-bold text-center">
+        <div className="grid grid-cols-2 p-1.5 bg-slate-100 border-b border-slate-200 text-xs font-bold text-center gap-1">
           <button
             type="button"
             onClick={() => setTab('1v1')}
             className={`py-2.5 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer ${
               tab === '1v1'
-                ? 'bg-blue-600 text-white shadow-md font-bold'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-emerald-600 text-white shadow-xs font-extrabold'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             <Swords className="w-4 h-4" />
@@ -142,8 +142,8 @@ export const MatchModal: React.FC<MatchModalProps> = ({
             onClick={() => setTab('QUICK')}
             className={`py-2.5 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer ${
               tab === 'QUICK'
-                ? 'bg-blue-600 text-white shadow-md font-bold'
-                : 'text-slate-400 hover:text-white'
+                ? 'bg-emerald-600 text-white shadow-xs font-extrabold'
+                : 'text-slate-600 hover:text-slate-900'
             }`}
           >
             <Zap className="w-4 h-4" />
@@ -152,7 +152,7 @@ export const MatchModal: React.FC<MatchModalProps> = ({
         </div>
 
         {error && (
-          <div className="mx-6 mt-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-semibold flex items-center gap-2">
+          <div className="mx-6 mt-4 p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-700 text-xs font-semibold flex items-center gap-2">
             <AlertCircle className="w-4 h-4 shrink-0" />
             {error}
           </div>
@@ -164,11 +164,11 @@ export const MatchModal: React.FC<MatchModalProps> = ({
             {/* Player 1 & Player 2 Selection */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase font-mono tracking-widest font-bold text-slate-400">Giocatore 1</label>
+                <label className="text-[10px] uppercase font-mono tracking-widest font-extrabold text-slate-500">Giocatore 1</label>
                 <select
                   value={player1Id}
                   onChange={(e) => setPlayer1Id(e.target.value)}
-                  className="w-full bg-[#0A0C10] border border-slate-800 rounded-xl px-3 py-2.5 text-white font-medium focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm cursor-pointer"
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-900 font-bold focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm cursor-pointer shadow-xs"
                 >
                   {players.map((p) => (
                     <option key={p.id} value={p.id}>
@@ -180,11 +180,11 @@ export const MatchModal: React.FC<MatchModalProps> = ({
 
               {/* Player 2 Selection */}
               <div className="space-y-1.5">
-                <label className="text-[10px] uppercase font-mono tracking-widest font-bold text-slate-400">Giocatore 2</label>
+                <label className="text-[10px] uppercase font-mono tracking-widest font-extrabold text-slate-500">Giocatore 2</label>
                 <select
                   value={player2Id}
                   onChange={(e) => setPlayer2Id(e.target.value)}
-                  className="w-full bg-[#0A0C10] border border-slate-800 rounded-xl px-3 py-2.5 text-white font-medium focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm cursor-pointer"
+                  className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-900 font-bold focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none text-sm cursor-pointer shadow-xs"
                 >
                   {players.map((p) => (
                     <option key={p.id} value={p.id}>
@@ -196,7 +196,7 @@ export const MatchModal: React.FC<MatchModalProps> = ({
             </div>
 
             {/* Score Entry */}
-            <div className="bg-[#0A0C10] p-4 rounded-2xl border border-slate-800/80 text-center space-y-3">
+            <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center space-y-3">
               <div className="text-[10px] uppercase font-mono tracking-widest font-bold text-slate-500">Punteggio Finale (Gol)</div>
               <div className="flex items-center justify-center space-x-4">
                 <div className="flex flex-col items-center">
@@ -206,10 +206,10 @@ export const MatchModal: React.FC<MatchModalProps> = ({
                     max="30"
                     value={score1}
                     onChange={(e) => setScore1(parseInt(e.target.value) || 0)}
-                    className="w-16 h-14 bg-[#14171D] border-2 border-blue-500/50 rounded-xl text-center text-2xl font-black text-white focus:outline-none focus:border-blue-400 font-mono"
+                    className="w-16 h-14 bg-white border-2 border-emerald-500 rounded-xl text-center text-2xl font-black text-slate-900 focus:outline-none focus:border-emerald-600 font-mono shadow-xs"
                   />
                 </div>
-                <span className="text-2xl font-black text-slate-600">-</span>
+                <span className="text-2xl font-black text-slate-400">-</span>
                 <div className="flex flex-col items-center">
                   <input
                     type="number"
@@ -217,7 +217,7 @@ export const MatchModal: React.FC<MatchModalProps> = ({
                     max="30"
                     value={score2}
                     onChange={(e) => setScore2(parseInt(e.target.value) || 0)}
-                    className="w-16 h-14 bg-[#14171D] border-2 border-blue-500/50 rounded-xl text-center text-2xl font-black text-white focus:outline-none focus:border-blue-400 font-mono"
+                    className="w-16 h-14 bg-white border-2 border-emerald-500 rounded-xl text-center text-2xl font-black text-slate-900 focus:outline-none focus:border-emerald-600 font-mono shadow-xs"
                   />
                 </div>
               </div>
@@ -225,20 +225,20 @@ export const MatchModal: React.FC<MatchModalProps> = ({
 
             {/* Win Type Selector */}
             <div className="space-y-2">
-              <label className="text-[10px] uppercase font-mono tracking-widest font-bold text-slate-400">Modalità Vittoria</label>
+              <label className="text-[10px] uppercase font-mono tracking-widest font-extrabold text-slate-500">Modalità Vittoria</label>
               <div className="grid grid-cols-2 gap-3">
                 <button
                   type="button"
                   onClick={() => setWinType('REGULAR')}
                   className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                     winType === 'REGULAR'
-                      ? 'bg-blue-600/20 border-blue-500 text-white shadow-lg'
-                      : 'bg-[#0A0C10] border-slate-800 text-slate-400 hover:border-slate-700'
+                      ? 'bg-emerald-50 border-emerald-500 text-slate-900 shadow-xs'
+                      : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                   }`}
                 >
-                  <div className="font-bold text-sm text-blue-400 flex items-center justify-between">
+                  <div className="font-bold text-sm text-emerald-800 flex items-center justify-between">
                     <span>Tempi Regolamentari</span>
-                    <span className="text-xs font-black bg-blue-600 text-white px-1.5 py-0.5 rounded font-mono">+3 PT</span>
+                    <span className="text-xs font-black bg-emerald-600 text-white px-1.5 py-0.5 rounded font-mono">+3 PT</span>
                   </div>
                   <p className="text-[11px] text-slate-500 mt-1">Vittoria nei 90 min (3 pt al vincitore, 0 al perdente)</p>
                 </button>
@@ -248,13 +248,13 @@ export const MatchModal: React.FC<MatchModalProps> = ({
                   onClick={() => setWinType('PENALTIES')}
                   className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                     winType === 'PENALTIES'
-                      ? 'bg-indigo-500/20 border-indigo-500 text-white shadow-lg'
-                      : 'bg-[#0A0C10] border-slate-800 text-slate-400 hover:border-slate-700'
+                      ? 'bg-indigo-50 border-indigo-500 text-slate-900 shadow-xs'
+                      : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                   }`}
                 >
-                  <div className="font-bold text-sm text-indigo-300 flex items-center justify-between">
+                  <div className="font-bold text-sm text-indigo-700 flex items-center justify-between">
                     <span>Ai Rigori</span>
-                    <span className="text-xs font-black bg-indigo-500 text-white px-1.5 py-0.5 rounded font-mono">+2 PT</span>
+                    <span className="text-xs font-black bg-indigo-600 text-white px-1.5 py-0.5 rounded font-mono">+2 PT</span>
                   </div>
                   <p className="text-[11px] text-slate-500 mt-1">Vittoria ai calci di rigore (2 pt al vincitore, 0 al perdente)</p>
                 </button>
@@ -263,13 +263,13 @@ export const MatchModal: React.FC<MatchModalProps> = ({
 
             {/* Notes */}
             <div className="space-y-1">
-              <label className="text-xs font-bold text-slate-400">Note / Dettagli (opzionale)</label>
+              <label className="text-xs font-bold text-slate-600">Note / Dettagli (opzionale)</label>
               <input
                 type="text"
                 placeholder="Es. Gol allo scadere, rigore decisivo..."
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="w-full bg-[#0A0C10] border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-blue-500"
+                className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-500 shadow-xs"
               />
             </div>
 
@@ -278,13 +278,13 @@ export const MatchModal: React.FC<MatchModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 text-sm font-semibold hover:bg-slate-700 transition-colors cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 text-sm font-semibold hover:bg-slate-200 transition-colors cursor-pointer"
               >
                 Annulla
               </button>
               <button
                 type="submit"
-                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/25 transition-all cursor-pointer"
+                className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-xs transition-all cursor-pointer"
               >
                 Salva Partita
               </button>
@@ -296,11 +296,11 @@ export const MatchModal: React.FC<MatchModalProps> = ({
         {tab === 'QUICK' && (
           <form onSubmit={handleSaveQuick} className="p-6 space-y-5">
             <div className="space-y-1.5">
-              <label className="text-[10px] uppercase font-mono tracking-widest font-bold text-slate-400">Seleziona Giocatore</label>
+              <label className="text-[10px] uppercase font-mono tracking-widest font-extrabold text-slate-500">Seleziona Giocatore</label>
               <select
                 value={quickPlayerId}
                 onChange={(e) => setQuickPlayerId(e.target.value)}
-                className="w-full bg-[#0A0C10] border border-slate-800 rounded-xl px-3 py-2.5 text-white font-medium focus:ring-2 focus:ring-blue-500 outline-none text-sm"
+                className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-slate-900 font-bold focus:ring-2 focus:ring-emerald-500 outline-none text-sm shadow-xs"
               >
                 {players.map((p) => (
                   <option key={p.id} value={p.id}>
@@ -311,22 +311,22 @@ export const MatchModal: React.FC<MatchModalProps> = ({
             </div>
 
             <div className="space-y-2">
-              <label className="text-[10px] uppercase font-mono tracking-widest font-bold text-slate-400">Esito Partita</label>
+              <label className="text-[10px] uppercase font-mono tracking-widest font-extrabold text-slate-500">Esito Partita</label>
               <div className="space-y-2">
                 <button
                   type="button"
                   onClick={() => setQuickType('REGULAR')}
                   className={`w-full p-3 rounded-xl border text-left transition-all flex items-center justify-between cursor-pointer ${
                     quickType === 'REGULAR'
-                      ? 'bg-blue-600/20 border-blue-500 text-white'
-                      : 'bg-[#0A0C10] border-slate-800 text-slate-400 hover:border-slate-700'
+                      ? 'bg-emerald-50 border-emerald-500 text-slate-900'
+                      : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                   }`}
                 >
                   <div>
-                    <div className="font-bold text-sm text-blue-400">Vittoria Tempi Regolamentari</div>
+                    <div className="font-bold text-sm text-emerald-800">Vittoria Tempi Regolamentari</div>
                     <div className="text-xs text-slate-500">Vittoria standard nei 90 minuti</div>
                   </div>
-                  <span className="font-mono font-bold text-sm bg-blue-600 text-white px-2 py-1 rounded-lg">
+                  <span className="font-mono font-black text-sm bg-emerald-600 text-white px-2 py-1 rounded-lg">
                     +3 PT
                   </span>
                 </button>
@@ -336,15 +336,15 @@ export const MatchModal: React.FC<MatchModalProps> = ({
                   onClick={() => setQuickType('PENALTIES')}
                   className={`w-full p-3 rounded-xl border text-left transition-all flex items-center justify-between cursor-pointer ${
                     quickType === 'PENALTIES'
-                      ? 'bg-indigo-500/20 border-indigo-500 text-white'
-                      : 'bg-[#0A0C10] border-slate-800 text-slate-400 hover:border-slate-700'
+                      ? 'bg-indigo-50 border-indigo-500 text-slate-900'
+                      : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                   }`}
                 >
                   <div>
-                    <div className="font-bold text-sm text-indigo-300">Vittoria ai Rigori</div>
+                    <div className="font-bold text-sm text-indigo-700">Vittoria ai Rigori</div>
                     <div className="text-xs text-slate-500">Vittoria dopo i calci di rigore</div>
                   </div>
-                  <span className="font-mono font-bold text-sm bg-indigo-500 text-white px-2 py-1 rounded-lg">
+                  <span className="font-mono font-black text-sm bg-indigo-600 text-white px-2 py-1 rounded-lg">
                     +2 PT
                   </span>
                 </button>
@@ -354,15 +354,15 @@ export const MatchModal: React.FC<MatchModalProps> = ({
                   onClick={() => setQuickType('LOSS')}
                   className={`w-full p-3 rounded-xl border text-left transition-all flex items-center justify-between cursor-pointer ${
                     quickType === 'LOSS'
-                      ? 'bg-rose-500/20 border-rose-500 text-white'
-                      : 'bg-[#0A0C10] border-slate-800 text-slate-400 hover:border-slate-700'
+                      ? 'bg-slate-100 border-slate-300 text-slate-900'
+                      : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
                   }`}
                 >
                   <div>
-                    <div className="font-bold text-sm text-slate-300">Sconfitta</div>
+                    <div className="font-bold text-sm text-slate-700">Sconfitta</div>
                     <div className="text-xs text-slate-500">Nessun punto assegnato</div>
                   </div>
-                  <span className="font-mono font-bold text-sm bg-slate-800 text-slate-400 px-2 py-1 rounded-lg">
+                  <span className="font-mono font-black text-sm bg-slate-300 text-slate-700 px-2 py-1 rounded-lg">
                     0 PT
                   </span>
                 </button>
@@ -370,13 +370,13 @@ export const MatchModal: React.FC<MatchModalProps> = ({
             </div>
 
             <div className="space-y-1">
-              <label className="text-xs font-bold text-slate-400">Note (opzionale)</label>
+              <label className="text-xs font-bold text-slate-600">Note (opzionale)</label>
               <input
                 type="text"
                 placeholder="Es. Sfida amichevole pausa pranzo"
                 value={quickNotes}
                 onChange={(e) => setQuickNotes(e.target.value)}
-                className="w-full bg-[#0A0C10] border border-slate-800 rounded-xl px-3 py-2 text-xs text-white placeholder-slate-600 focus:outline-none focus:border-blue-500"
+                className="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-emerald-500 shadow-xs"
               />
             </div>
 
@@ -384,13 +384,13 @@ export const MatchModal: React.FC<MatchModalProps> = ({
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2.5 rounded-xl bg-slate-800 text-slate-300 text-sm font-semibold hover:bg-slate-700 cursor-pointer"
+                className="px-4 py-2.5 rounded-xl bg-slate-100 text-slate-700 text-sm font-semibold hover:bg-slate-200 cursor-pointer"
               >
                 Annulla
               </button>
               <button
                 type="submit"
-                className="px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/25 cursor-pointer"
+                className="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-sm shadow-xs cursor-pointer"
               >
                 Assegna Punti
               </button>

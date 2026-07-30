@@ -191,7 +191,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0A0C10] text-slate-100 font-sans antialiased selection:bg-blue-600 selection:text-white flex flex-col">
+    <div className="min-h-screen bg-slate-100 text-slate-900 font-sans antialiased selection:bg-emerald-600 selection:text-white flex flex-col">
       {/* Top Header Navigation */}
       <Header
         onOpenMatchModal={() => setIsMatchModalOpen(true)}
@@ -205,32 +205,32 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 pb-24 sm:pb-6 space-y-5 sm:space-y-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-3 sm:py-6 pb-24 sm:pb-6 space-y-4 sm:space-y-6">
         
         {/* Navigation Tabs (Desktop / Tablet) */}
-        <div className="hidden sm:flex items-center justify-between border-b border-slate-800/60 pb-3 gap-2 overflow-x-auto">
+        <div className="hidden sm:flex items-center justify-between border-b border-slate-200 pb-3 gap-2 overflow-x-auto">
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setActiveTab('LEADERBOARD')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer ${
                 activeTab === 'LEADERBOARD'
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
-                  : 'bg-[#14171D] text-slate-400 hover:text-white border border-slate-800/60'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+                  : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200 hover:border-slate-300'
               }`}
             >
               <Trophy className="w-4 h-4 text-amber-400" />
-              Classifica Generale
+              Classifica FC 2026
             </button>
 
             <button
               onClick={() => setActiveTab('HISTORY')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer ${
                 activeTab === 'HISTORY'
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
-                  : 'bg-[#14171D] text-slate-400 hover:text-white border border-slate-800/60'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+                  : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200 hover:border-slate-300'
               }`}
             >
-              <History className="w-4 h-4 text-blue-400" />
+              <History className="w-4 h-4 text-blue-500" />
               Storico Partite
             </button>
 
@@ -238,23 +238,23 @@ export default function App() {
               onClick={() => setActiveTab('H2H')}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-sm transition-all cursor-pointer ${
                 activeTab === 'H2H'
-                  ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/20'
-                  : 'bg-[#14171D] text-slate-400 hover:text-white border border-slate-800/60'
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+                  : 'bg-white text-slate-600 hover:text-slate-900 border border-slate-200 hover:border-slate-300'
               }`}
             >
-              <Swords className="w-4 h-4 text-indigo-400" />
+              <Swords className="w-4 h-4 text-indigo-500" />
               Scontri Diretti
             </button>
           </div>
 
-          <div className="flex items-center text-xs text-slate-500 font-mono uppercase tracking-widest">
-            Neten League &bull; Season 2026
+          <div className="flex items-center text-xs text-slate-500 font-mono uppercase tracking-widest bg-emerald-50/80 px-3 py-1.5 rounded-lg border border-emerald-200/60 font-semibold">
+            EA SPORTS FC 2026 &bull; Neten League
           </div>
         </div>
 
         {/* Tab Content */}
         {activeTab === 'LEADERBOARD' && (
-          <div className="space-y-6 animate-fadeIn">
+          <div className="space-y-4 sm:space-y-6 animate-fadeIn">
             <StatsOverview stats={stats} />
 
             <LeaderboardTable stats={stats} />
@@ -281,40 +281,40 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+      <footer className="border-t border-slate-200 bg-white py-5 text-center text-xs text-slate-500 shadow-inner">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>Neten FC 2026 League &bull; Punteggio: +3 Tempi Regolamentari, +2 Rigori, 0 Sconfitta</span>
-          <span className="text-slate-600">Sviluppato per la squadra Neten</span>
+          <span className="font-medium text-slate-600">EA SPORTS FC 2026 &bull; Neten League &bull; Regolamento: +3 Tempi Regolamentari, +2 Rigori, 0 Sconfitta</span>
+          <span className="text-slate-400 font-mono">Powered for Neten FC 2026</span>
         </div>
       </footer>
 
       {/* Mobile Sticky Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-[#0A0C10]/95 backdrop-blur-xl border-t border-slate-800/80 px-2 py-1.5 sm:hidden shadow-2xl">
+      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-1.5 sm:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
         <div className="flex items-center justify-around">
           <button
             onClick={() => setActiveTab('LEADERBOARD')}
             className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all ${
-              activeTab === 'LEADERBOARD' ? 'text-blue-400 font-bold' : 'text-slate-400 font-medium'
+              activeTab === 'LEADERBOARD' ? 'text-emerald-600 font-bold' : 'text-slate-500 font-medium'
             }`}
           >
-            <Trophy className={`w-5 h-5 ${activeTab === 'LEADERBOARD' ? 'text-amber-400' : 'text-slate-400'}`} />
+            <Trophy className={`w-5 h-5 ${activeTab === 'LEADERBOARD' ? 'text-amber-500' : 'text-slate-400'}`} />
             <span className="text-[10px] mt-0.5">Classifica</span>
           </button>
 
           <button
             onClick={() => setActiveTab('HISTORY')}
             className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all ${
-              activeTab === 'HISTORY' ? 'text-blue-400 font-bold' : 'text-slate-400 font-medium'
+              activeTab === 'HISTORY' ? 'text-emerald-600 font-bold' : 'text-slate-500 font-medium'
             }`}
           >
-            <History className={`w-5 h-5 ${activeTab === 'HISTORY' ? 'text-blue-400' : 'text-slate-400'}`} />
+            <History className={`w-5 h-5 ${activeTab === 'HISTORY' ? 'text-blue-600' : 'text-slate-400'}`} />
             <span className="text-[10px] mt-0.5">Storico</span>
           </button>
 
           {/* Central Action Button */}
           <button
             onClick={() => setIsMatchModalOpen(true)}
-            className="flex flex-col items-center justify-center -mt-5 bg-blue-600 hover:bg-blue-500 text-white p-3 rounded-full shadow-lg shadow-blue-600/40 ring-4 ring-[#0A0C10] active:scale-95 transition-transform"
+            className="flex flex-col items-center justify-center -mt-5 bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 rounded-full shadow-lg shadow-emerald-600/35 ring-4 ring-slate-100 active:scale-95 transition-transform"
             title="Aggiungi Punti o Partita"
           >
             <Plus className="w-6 h-6 stroke-[2.5]" />
@@ -323,10 +323,10 @@ export default function App() {
           <button
             onClick={() => setActiveTab('H2H')}
             className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all ${
-              activeTab === 'H2H' ? 'text-blue-400 font-bold' : 'text-slate-400 font-medium'
+              activeTab === 'H2H' ? 'text-emerald-600 font-bold' : 'text-slate-500 font-medium'
             }`}
           >
-            <Swords className={`w-5 h-5 ${activeTab === 'H2H' ? 'text-indigo-400' : 'text-slate-400'}`} />
+            <Swords className={`w-5 h-5 ${activeTab === 'H2H' ? 'text-indigo-600' : 'text-slate-400'}`} />
             <span className="text-[10px] mt-0.5">Scontri</span>
           </button>
         </div>

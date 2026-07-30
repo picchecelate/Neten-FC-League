@@ -36,24 +36,24 @@ export const MatchHistory: React.FC<MatchHistoryProps> = ({
   const totalEntries = filteredMatches.length + filteredQuickPoints.length;
 
   return (
-    <div className="bg-[#14171D] border border-slate-800/80 rounded-2xl shadow-2xl overflow-hidden space-y-4">
+    <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden space-y-4">
       {/* Header & Filter */}
-      <div className="px-6 py-4 bg-[#0A0C10]/60 border-b border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="px-4 sm:px-6 py-4 bg-slate-50 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center space-x-2">
-          <History className="w-5 h-5 text-blue-400" />
-          <h2 className="text-lg font-bold text-white tracking-tight">Storico Partite & Inserimenti</h2>
-          <span className="text-xs font-mono bg-blue-950/60 text-blue-400 px-2.5 py-0.5 rounded-full font-bold border border-blue-800/50">
+          <History className="w-5 h-5 text-emerald-600" />
+          <h2 className="text-base sm:text-lg font-black text-slate-900 tracking-tight font-mono">Storico Partite & Inserimenti</h2>
+          <span className="text-xs font-mono bg-emerald-50 text-emerald-700 px-2.5 py-0.5 rounded-full font-bold border border-emerald-200">
             {totalEntries}
           </span>
         </div>
 
         {/* Filter Dropdown */}
         <div className="flex items-center space-x-2">
-          <Filter className="w-4 h-4 text-slate-500" />
+          <Filter className="w-4 h-4 text-slate-400" />
           <select
             value={selectedPlayerFilter}
             onChange={(e) => setSelectedPlayerFilter(e.target.value)}
-            className="bg-[#0A0C10] border border-slate-800 rounded-xl px-3 py-1.5 text-xs text-slate-200 font-semibold focus:outline-none focus:border-blue-500 cursor-pointer"
+            className="bg-white border border-slate-300 rounded-xl px-3 py-1.5 text-xs text-slate-800 font-semibold focus:outline-none focus:border-emerald-500 cursor-pointer shadow-xs"
           >
             <option value="ALL">Tutti i Colleghi</option>
             {players.map((p) => (
@@ -65,9 +65,9 @@ export const MatchHistory: React.FC<MatchHistoryProps> = ({
         </div>
       </div>
 
-      <div className="px-6 pb-6 space-y-3">
+      <div className="px-4 sm:px-6 pb-6 space-y-3">
         {totalEntries === 0 ? (
-          <div className="text-center py-12 text-slate-500 text-sm">
+          <div className="text-center py-12 text-slate-400 text-sm">
             Nessuna partita o inserimento registrato per questo filtro.
           </div>
         ) : (
@@ -87,41 +87,41 @@ export const MatchHistory: React.FC<MatchHistoryProps> = ({
               return (
                 <div
                   key={m.id}
-                  className="p-4 bg-[#0A0C10] border border-slate-800/80 rounded-xl hover:border-slate-700 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
+                  className="p-3.5 sm:p-4 bg-slate-50/70 border border-slate-200 rounded-xl hover:border-emerald-300 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3"
                 >
-                  <div className="flex items-center space-x-4">
-                    <div className="p-2.5 rounded-xl bg-blue-600/10 text-blue-400 border border-blue-500/20 shrink-0">
+                  <div className="flex items-center space-x-3.5">
+                    <div className="p-2.5 rounded-xl bg-emerald-100/70 text-emerald-700 border border-emerald-200 shrink-0">
                       <Swords className="w-5 h-5" />
                     </div>
 
                     <div>
                       {/* Players */}
-                      <div className="flex items-center space-x-2 text-base font-bold text-white">
-                        <span className={m.winnerId === m.player1Id ? 'text-blue-400 font-extrabold' : 'text-slate-300'}>
+                      <div className="flex items-center space-x-2 text-sm sm:text-base font-bold text-slate-900">
+                        <span className={m.winnerId === m.player1Id ? 'text-emerald-700 font-extrabold' : 'text-slate-600'}>
                           {p1Name}
                         </span>
                         
-                        <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-200 text-xs font-mono font-bold">
+                        <span className="px-2 py-0.5 rounded bg-white border border-slate-200 text-slate-800 text-xs font-mono font-black shadow-2xs">
                           {m.score1} - {m.score2}
                         </span>
 
-                        <span className={m.winnerId === m.player2Id ? 'text-blue-400 font-extrabold' : 'text-slate-300'}>
+                        <span className={m.winnerId === m.player2Id ? 'text-emerald-700 font-extrabold' : 'text-slate-600'}>
                           {p2Name}
                         </span>
                       </div>
 
                       {/* Details badge & date */}
-                      <div className="flex flex-wrap items-center gap-2 mt-1 text-xs text-slate-400">
-                        <span className="flex items-center gap-1 font-mono text-[11px] text-slate-500">
-                          <Calendar className="w-3 h-3 text-slate-500" />
+                      <div className="flex flex-wrap items-center gap-2 mt-1 text-xs text-slate-500">
+                        <span className="flex items-center gap-1 font-mono text-[11px] text-slate-400">
+                          <Calendar className="w-3 h-3 text-slate-400" />
                           {dateStr}
                         </span>
 
                         <span
                           className={`px-2 py-0.5 rounded text-[11px] font-mono font-bold ${
                             m.winType === 'REGULAR'
-                              ? 'bg-blue-600/20 text-blue-300 border border-blue-500/30'
-                              : 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30'
+                              ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                              : 'bg-indigo-50 text-indigo-700 border border-indigo-200'
                           }`}
                         >
                           {m.winType === 'REGULAR'
@@ -129,7 +129,7 @@ export const MatchHistory: React.FC<MatchHistoryProps> = ({
                             : `Vittoria ai Rigori (+2 PT a ${winnerName})`}
                         </span>
 
-                        {m.notes && <span className="italic text-slate-500">"{m.notes}"</span>}
+                        {m.notes && <span className="italic text-slate-400">"{m.notes}"</span>}
                       </div>
                     </div>
                   </div>
@@ -138,7 +138,7 @@ export const MatchHistory: React.FC<MatchHistoryProps> = ({
                   <div className="flex justify-end">
                     <button
                       onClick={() => onDeleteMatch(m.id)}
-                      className="p-2 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 transition-colors cursor-pointer"
+                      className="p-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                       title="Elimina partita"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -161,35 +161,35 @@ export const MatchHistory: React.FC<MatchHistoryProps> = ({
               return (
                 <div
                   key={qp.id}
-                  className="p-4 bg-[#0A0C10] border border-slate-800/80 rounded-xl hover:border-slate-700 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
+                  className="p-3.5 sm:p-4 bg-slate-50/70 border border-slate-200 rounded-xl hover:border-emerald-300 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3"
                 >
-                  <div className="flex items-center space-x-4">
-                    <div className="p-2.5 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 shrink-0">
+                  <div className="flex items-center space-x-3.5">
+                    <div className="p-2.5 rounded-xl bg-indigo-100/70 text-indigo-700 border border-indigo-200 shrink-0">
                       <Zap className="w-5 h-5" />
                     </div>
 
                     <div>
-                      <div className="flex items-center space-x-2 text-sm font-bold text-white">
-                        <span>Punti Rapidi: <strong className="text-blue-400 font-extrabold">{playerName}</strong></span>
+                      <div className="flex items-center space-x-2 text-xs sm:text-sm font-bold text-slate-900">
+                        <span>Punti Rapidi: <strong className="text-emerald-700 font-extrabold">{playerName}</strong></span>
                         <span
                           className={`px-2 py-0.5 rounded text-xs font-mono font-bold ${
                             qp.type === 'REGULAR'
-                              ? 'bg-blue-600 text-white'
+                              ? 'bg-emerald-600 text-white'
                               : qp.type === 'PENALTIES'
-                              ? 'bg-indigo-500 text-white'
-                              : 'bg-slate-800 text-slate-400'
+                              ? 'bg-indigo-600 text-white'
+                              : 'bg-slate-200 text-slate-700'
                           }`}
                         >
                           +{qp.points} PT
                         </span>
                       </div>
 
-                      <div className="flex items-center gap-2 mt-1 text-xs text-slate-400">
-                        <span className="flex items-center gap-1 font-mono text-[11px] text-slate-500">
-                          <Calendar className="w-3 h-3 text-slate-500" />
+                      <div className="flex items-center gap-2 mt-1 text-xs text-slate-500">
+                        <span className="flex items-center gap-1 font-mono text-[11px] text-slate-400">
+                          <Calendar className="w-3 h-3 text-slate-400" />
                           {dateStr}
                         </span>
-                        {qp.notes && <span className="italic text-slate-500">"{qp.notes}"</span>}
+                        {qp.notes && <span className="italic text-slate-400">"{qp.notes}"</span>}
                       </div>
                     </div>
                   </div>
@@ -197,7 +197,7 @@ export const MatchHistory: React.FC<MatchHistoryProps> = ({
                   <div className="flex justify-end">
                     <button
                       onClick={() => onDeleteQuickPoint(qp.id)}
-                      className="p-2 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 transition-colors cursor-pointer"
+                      className="p-2 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
                       title="Elimina punto rapido"
                     >
                       <Trash2 className="w-4 h-4" />
