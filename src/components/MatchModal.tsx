@@ -25,6 +25,7 @@ export const MatchModal: React.FC<MatchModalProps> = ({
   const [score1, setScore1] = useState<number>(2);
   const [score2, setScore2] = useState<number>(1);
   const [winType, setWinType] = useState<'REGULAR' | 'PENALTIES'>('REGULAR');
+  const [penaltyWinnerId, setPenaltyWinnerId] = useState<string>(players[0]?.id || '');
   const [notes, setNotes] = useState<string>('');
   const [error, setError] = useState<string>('');
 
@@ -52,16 +53,19 @@ export const MatchModal: React.FC<MatchModalProps> = ({
     let winnerId = '';
     let loserId = '';
 
-    if (score1 > score2) {
-      winnerId = player1Id;
-      loserId = player2Id;
-    } else if (score2 > score1) {
-      winnerId = player2Id;
-      loserId = player1Id;
+    if (winType === 'PENALTIES') {
+      const pWinner = penaltyWinnerId === player2Id ? player2Id : player1Id;
+      winnerId = pWinner;
+      loserId = pWinner === player1Id ? player2Id : player1Id;
     } else {
-      // Tie score
-      if (winType === 'REGULAR') {
-        setError('In caso di pareggio nei gol, la partita deve essere vinta ai rigori!');
+      if (score1 > score2) {
+        winnerId = player1Id;
+        loserId = player2Id;
+      } else if (score2 > score1) {
+        winnerId = player2Id;
+        loserId = player1Id;
+      } else {
+        setError('I tempi regolamentari sono finiti in pareggio! Seleziona la modalità "Ai Rigori" e indica il vincitore dei rigori.');
         return;
       }
     }
@@ -73,8 +77,8 @@ export const MatchModal: React.FC<MatchModalProps> = ({
       score1,
       score2,
       winType,
-      winnerId: winnerId || player1Id,
-      loserId: loserId || player2Id,
+      winnerId,
+      loserId,
       notes,
     });
 
@@ -197,9 +201,17 @@ export const MatchModal: React.FC<MatchModalProps> = ({
 
             {/* Score Entry */}
             <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-center space-y-3">
-              <div className="text-[10px] uppercase font-mono tracking-widest font-bold text-slate-500">Punteggio Finale (Gol)</div>
-              <div className="flex items-center justify-center space-x-4">
+              <div className="text-[10px] uppercase font-mono tracking-widest font-extrabold text-slate-600">
+                Punteggio Tempi Regolamentari (Gol)
+              </div>
+              <p className="text-[11px] text-slate-500 font-medium -mt-1">
+                Questi gol faranno fede per le statistiche di Gol Fatti (GF), Subiti (GS) e Differenza Gol (DG).
+              </p>
+              <div className="flex items-center justify-center space-x-4 pt-1">
                 <div className="flex flex-col items-center">
+                  <span className="text-[10px] font-mono text-slate-500 font-bold mb-1 truncate max-w-[100px]">
+                    {players.find((p) => p.id === player1Id)?.name || 'Giocatore 1'}
+                  </span>
                   <input
                     type="number"
                     min="0"
@@ -209,8 +221,11 @@ export const MatchModal: React.FC<MatchModalProps> = ({
                     className="w-16 h-14 bg-white border-2 border-emerald-500 rounded-xl text-center text-2xl font-black text-slate-900 focus:outline-none focus:border-emerald-600 font-mono shadow-xs"
                   />
                 </div>
-                <span className="text-2xl font-black text-slate-400">-</span>
+                <span className="text-2xl font-black text-slate-400 self-end mb-3">-</span>
                 <div className="flex flex-col items-center">
+                  <span className="text-[10px] font-mono text-slate-500 font-bold mb-1 truncate max-w-[100px]">
+                    {players.find((p) => p.id === player2Id)?.name || 'Giocatore 2'}
+                  </span>
                   <input
                     type="number"
                     min="0"
@@ -225,7 +240,7 @@ export const MatchModal: React.FC<MatchModalProps> = ({
 
             {/* Win Type Selector */}
             <div className="space-y-2">
-              <label className="text-[10px] uppercase font-mono tracking-widest font-extrabold text-slate-500">Modalità Vittoria</label>
+              <label className="text-[10px] uppercase font-mono tracking-widest font-extrabold text-slate-500">Modalità Esito</label>
               <div className="grid grid-cols-2 gap-3">
                 <button
                   type="button"
@@ -245,7 +260,12 @@ export const MatchModal: React.FC<MatchModalProps> = ({
 
                 <button
                   type="button"
-                  onClick={() => setWinType('PENALTIES')}
+                  onClick={() => {
+                    setWinType('PENALTIES');
+                    if (!penaltyWinnerId || (penaltyWinnerId !== player1Id && penaltyWinnerId !== player2Id)) {
+                      setPenaltyWinnerId(player1Id);
+                    }
+                  }}
                   className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                     winType === 'PENALTIES'
                       ? 'bg-indigo-50 border-indigo-500 text-slate-900 shadow-xs'
@@ -260,6 +280,48 @@ export const MatchModal: React.FC<MatchModalProps> = ({
                 </button>
               </div>
             </div>
+
+            {/* Penalty Winner Selector (Visible when WinType is PENALTIES) */}
+            {winType === 'PENALTIES' && (
+              <div className="p-4 rounded-2xl bg-indigo-50/70 border border-indigo-200 space-y-2.5 animate-fadeIn">
+                <div className="flex items-center justify-between">
+                  <label className="text-[11px] uppercase font-mono tracking-wider font-black text-indigo-900 flex items-center gap-1.5">
+                    <Trophy className="w-4 h-4 text-indigo-600" />
+                    Squadra Vincitrice ai Rigori (+2 PT)
+                  </label>
+                  <span className="text-[10px] font-mono font-bold text-indigo-600 bg-white px-2 py-0.5 rounded border border-indigo-200">
+                    Seleziona Vincitore
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setPenaltyWinnerId(player1Id)}
+                    className={`p-3 rounded-xl border font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                      penaltyWinnerId === player1Id || (penaltyWinnerId !== player2Id)
+                        ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs font-black'
+                        : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                    }`}
+                  >
+                    {penaltyWinnerId === player1Id && <Check className="w-4 h-4 stroke-[3]" />}
+                    <span className="truncate">{players.find((p) => p.id === player1Id)?.name || 'Giocatore 1'}</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setPenaltyWinnerId(player2Id)}
+                    className={`p-3 rounded-xl border font-bold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                      penaltyWinnerId === player2Id
+                        ? 'bg-indigo-600 text-white border-indigo-600 shadow-xs font-black'
+                        : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'
+                    }`}
+                  >
+                    {penaltyWinnerId === player2Id && <Check className="w-4 h-4 stroke-[3]" />}
+                    <span className="truncate">{players.find((p) => p.id === player2Id)?.name || 'Giocatore 2'}</span>
+                  </button>
+                </div>
+              </div>
+            )}
 
             {/* Notes */}
             <div className="space-y-1">

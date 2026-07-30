@@ -1,12 +1,12 @@
 import React from 'react';
-import { Trophy, PlusCircle, Users, RotateCcw, Download, Upload, Shield, Swords } from 'lucide-react';
+import { Trophy, PlusCircle, Users, RotateCcw, Swords } from 'lucide-react';
 
 interface HeaderProps {
   onOpenMatchModal: () => void;
   onOpenPlayerModal: () => void;
   onResetData: () => void;
-  onExportData: () => void;
-  onImportData: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onExportData?: () => void;
+  onImportData?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   totalMatches: number;
   totalPlayers: number;
   topPlayerName?: string;
@@ -16,14 +16,10 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenMatchModal,
   onOpenPlayerModal,
   onResetData,
-  onExportData,
-  onImportData,
   totalMatches,
   totalPlayers,
   topPlayerName,
 }) => {
-  const fileInputRef = React.useRef<HTMLInputElement>(null);
-
   return (
     <header className="bg-white/95 border-b border-slate-200 sticky top-0 z-30 shadow-sm backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 sm:py-3.5">
@@ -105,34 +101,6 @@ export const Header: React.FC<HeaderProps> = ({
               <RotateCcw className="w-3.5 h-3.5 text-rose-600" />
               <span className="hidden sm:inline font-mono">Azzera Classifica</span>
             </button>
-
-            {/* Additional Tools Dropdown or Direct Buttons */}
-            <div className="flex items-center gap-0.5 bg-slate-50 border border-slate-200 p-0.5 sm:p-1 rounded-xl">
-              <button
-                id="btn-export-json"
-                onClick={onExportData}
-                className="p-1.5 sm:p-2 rounded-lg hover:bg-slate-200/80 text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
-                title="Esporta dati in JSON"
-              >
-                <Download className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              </button>
-              
-              <button
-                id="btn-import-json"
-                onClick={() => fileInputRef.current?.click()}
-                className="p-1.5 sm:p-2 rounded-lg hover:bg-slate-200/80 text-slate-500 hover:text-slate-900 transition-colors cursor-pointer"
-                title="Importa dati da JSON"
-              >
-                <Upload className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              </button>
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={onImportData}
-                accept=".json"
-                className="hidden"
-              />
-            </div>
           </div>
 
         </div>

@@ -289,8 +289,19 @@ export default function App() {
       </footer>
 
       {/* Mobile Sticky Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-1.5 sm:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-slate-200 px-3 py-2 sm:hidden shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
         <div className="flex items-center justify-around">
+          {/* Action Button: Inserisci Risultato / Nuova Partita (Far Left) */}
+          <button
+            id="btn-mobile-add-match"
+            onClick={() => setIsMatchModalOpen(true)}
+            className="flex flex-col items-center justify-center py-1 px-3 bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white rounded-xl shadow-md shadow-emerald-600/30 active:scale-95 transition-all cursor-pointer"
+            title="Inserisci nuovo risultato partita o punti"
+          >
+            <Plus className="w-5 h-5 stroke-[3]" />
+            <span className="text-[10px] font-black tracking-tight mt-0.5 whitespace-nowrap">+ Partita</span>
+          </button>
+
           <button
             onClick={() => setActiveTab('LEADERBOARD')}
             className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all ${
@@ -309,15 +320,6 @@ export default function App() {
           >
             <History className={`w-5 h-5 ${activeTab === 'HISTORY' ? 'text-blue-600' : 'text-slate-400'}`} />
             <span className="text-[10px] mt-0.5">Storico</span>
-          </button>
-
-          {/* Central Action Button */}
-          <button
-            onClick={() => setIsMatchModalOpen(true)}
-            className="flex flex-col items-center justify-center -mt-5 bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 rounded-full shadow-lg shadow-emerald-600/35 ring-4 ring-slate-100 active:scale-95 transition-transform"
-            title="Aggiungi Punti o Partita"
-          >
-            <Plus className="w-6 h-6 stroke-[2.5]" />
           </button>
 
           <button
