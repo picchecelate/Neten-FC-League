@@ -39,8 +39,8 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
         </div>
       </div>
 
-      {/* Responsive Table */}
-      <div className="overflow-x-auto">
+      {/* Responsive Table (Tablet/Desktop) */}
+      <div className="hidden sm:block overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-[#0A0C10]/40 text-slate-500 text-[10px] font-mono uppercase tracking-[0.2em] font-extrabold border-b border-slate-800/80">
@@ -208,6 +208,115 @@ export const LeaderboardTable: React.FC<LeaderboardTableProps> = ({
             })}
           </tbody>
         </table>
+      </div>
+
+      {/* Mobile Smartphone Optimized View */}
+      <div className="sm:hidden divide-y divide-slate-800/60">
+        {stats.map((item, index) => {
+          const rank = index + 1;
+          const initials = item.player.name
+            .split(' ')
+            .map((n) => n[0])
+            .join('')
+            .toUpperCase()
+            .slice(0, 2);
+
+          return (
+            <div
+              key={item.player.id}
+              className={`p-3.5 space-y-2.5 transition-colors ${
+                rank === 1 ? 'bg-gradient-to-r from-amber-500/10 via-transparent to-transparent' : ''
+              }`}
+            >
+              {/* Row Top: Pos + Avatar + Name + Points */}
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center space-x-2.5 min-w-0">
+                  <div className="shrink-0">
+                    {rank === 1 && (
+                      <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 text-slate-950 flex items-center justify-center font-black text-xs shadow-md shadow-amber-500/20">
+                        1°
+                      </div>
+                    )}
+                    {rank === 2 && (
+                      <div className="w-7 h-7 rounded-full bg-slate-800 text-slate-200 border border-slate-700 flex items-center justify-center font-bold text-xs">
+                        2°
+                      </div>
+                    )}
+                    {rank === 3 && (
+                      <div className="w-7 h-7 rounded-full bg-amber-950/60 text-amber-300 border border-amber-800/60 flex items-center justify-center font-bold text-xs">
+                        3°
+                      </div>
+                    )}
+                    {rank > 3 && (
+                      <div className="w-7 h-7 rounded-full bg-slate-900 text-slate-500 border border-slate-800 flex items-center justify-center font-mono text-xs font-bold">
+                        {rank}°
+                      </div>
+                    )}
+                  </div>
+
+                  <div
+                    className={`w-8 h-8 rounded-lg ${item.player.avatarColor || 'bg-blue-600'} text-white font-extrabold flex items-center justify-center shadow-sm text-xs border border-white/20 shrink-0`}
+                  >
+                    {initials}
+                  </div>
+
+                  <div className="min-w-0">
+                    <div className="font-bold text-slate-100 text-sm truncate flex items-center gap-1.5">
+                      <span>{item.player.name}</span>
+                      {rank === 1 && (
+                        <span className="text-[8px] font-mono bg-amber-500/10 text-amber-400 font-bold px-1 rounded border border-amber-500/30 uppercase">
+                          1°
+                        </span>
+                      )}
+                    </div>
+                    <div className="text-[11px] text-slate-400 font-mono">
+                      {item.played} Partite &bull; {item.winRate}% Win
+                    </div>
+                  </div>
+                </div>
+
+                {/* Points Pill */}
+                <div className="shrink-0 text-right">
+                  <span className="inline-block bg-blue-600/20 text-blue-400 font-mono font-black text-lg px-3 py-1 rounded-xl border border-blue-500/40 shadow-sm">
+                    {item.points} <span className="text-[10px] font-bold">PT</span>
+                  </span>
+                </div>
+              </div>
+
+              {/* Row Bottom: Stats Breakdown Chips */}
+              <div className="flex items-center justify-between text-xs font-mono pt-1 border-t border-slate-800/40">
+                <div className="flex items-center gap-2">
+                  <span className="text-blue-400 font-bold" title="Vittorie Regolari (+3)">
+                    {item.winsRegular}V (+3)
+                  </span>
+                  <span className="text-slate-600">&bull;</span>
+                  <span className="text-indigo-300 font-bold" title="Vittorie Rigori (+2)">
+                    {item.winsPenalties}VR (+2)
+                  </span>
+                  <span className="text-slate-600">&bull;</span>
+                  <span className="text-slate-400" title="Sconfitte">
+                    {item.losses}S
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-1.5">
+                  <span className="text-slate-500 text-[10px]">DG:</span>
+                  <span
+                    className={`font-bold px-1.5 py-0.2 rounded text-[11px] ${
+                      item.goalDifference > 0
+                        ? 'bg-blue-500/10 text-blue-400'
+                        : item.goalDifference < 0
+                        ? 'bg-rose-500/10 text-rose-400'
+                        : 'bg-slate-800 text-slate-500'
+                    }`}
+                  >
+                    {item.goalDifference > 0 ? `+${item.goalDifference}` : item.goalDifference}
+                  </span>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

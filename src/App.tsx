@@ -10,7 +10,7 @@ import { PlayerManagerModal } from './components/PlayerManagerModal';
 import { ResetModal } from './components/ResetModal';
 import { MatchHistory } from './components/MatchHistory';
 import { HeadToHead } from './components/HeadToHead';
-import { Trophy, History, Swords, Plus, RotateCcw, Shield } from 'lucide-react';
+import { Trophy, History, Swords, Plus, RotateCcw, Shield, PlusCircle } from 'lucide-react';
 
 const STORAGE_KEY_PLAYERS = 'neten_fc_players_v1';
 const STORAGE_KEY_MATCHES = 'neten_fc_matches_v1';
@@ -205,10 +205,10 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 pb-24 sm:pb-6 space-y-5 sm:space-y-6">
         
-        {/* Navigation Tabs */}
-        <div className="flex items-center justify-between border-b border-slate-800/60 pb-3 gap-2 overflow-x-auto">
+        {/* Navigation Tabs (Desktop / Tablet) */}
+        <div className="hidden sm:flex items-center justify-between border-b border-slate-800/60 pb-3 gap-2 overflow-x-auto">
           <div className="flex items-center space-x-2">
             <button
               onClick={() => setActiveTab('LEADERBOARD')}
@@ -247,7 +247,7 @@ export default function App() {
             </button>
           </div>
 
-          <div className="hidden sm:flex items-center text-xs text-slate-500 font-mono uppercase tracking-widest">
+          <div className="flex items-center text-xs text-slate-500 font-mono uppercase tracking-widest">
             Neten League &bull; Season 2026
           </div>
         </div>
@@ -287,6 +287,50 @@ export default function App() {
           <span className="text-slate-600">Sviluppato per la squadra Neten</span>
         </div>
       </footer>
+
+      {/* Mobile Sticky Bottom Navigation Bar */}
+      <nav className="fixed bottom-0 left-0 right-0 z-40 bg-[#0A0C10]/95 backdrop-blur-xl border-t border-slate-800/80 px-2 py-1.5 sm:hidden shadow-2xl">
+        <div className="flex items-center justify-around">
+          <button
+            onClick={() => setActiveTab('LEADERBOARD')}
+            className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all ${
+              activeTab === 'LEADERBOARD' ? 'text-blue-400 font-bold' : 'text-slate-400 font-medium'
+            }`}
+          >
+            <Trophy className={`w-5 h-5 ${activeTab === 'LEADERBOARD' ? 'text-amber-400' : 'text-slate-400'}`} />
+            <span className="text-[10px] mt-0.5">Classifica</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('HISTORY')}
+            className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all ${
+              activeTab === 'HISTORY' ? 'text-blue-400 font-bold' : 'text-slate-400 font-medium'
+            }`}
+          >
+            <History className={`w-5 h-5 ${activeTab === 'HISTORY' ? 'text-blue-400' : 'text-slate-400'}`} />
+            <span className="text-[10px] mt-0.5">Storico</span>
+          </button>
+
+          {/* Central Action Button */}
+          <button
+            onClick={() => setIsMatchModalOpen(true)}
+            className="flex flex-col items-center justify-center -mt-5 bg-blue-600 hover:bg-blue-500 text-white p-3 rounded-full shadow-lg shadow-blue-600/40 ring-4 ring-[#0A0C10] active:scale-95 transition-transform"
+            title="Aggiungi Punti o Partita"
+          >
+            <Plus className="w-6 h-6 stroke-[2.5]" />
+          </button>
+
+          <button
+            onClick={() => setActiveTab('H2H')}
+            className={`flex flex-col items-center justify-center py-1 px-3 rounded-xl transition-all ${
+              activeTab === 'H2H' ? 'text-blue-400 font-bold' : 'text-slate-400 font-medium'
+            }`}
+          >
+            <Swords className={`w-5 h-5 ${activeTab === 'H2H' ? 'text-indigo-400' : 'text-slate-400'}`} />
+            <span className="text-[10px] mt-0.5">Scontri</span>
+          </button>
+        </div>
+      </nav>
 
       {/* Modals */}
       <MatchModal
