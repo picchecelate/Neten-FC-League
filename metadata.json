@@ -1,0 +1,6 @@
+{
+  "name": "Neten FC 2026 Classifica",
+  "description": "Gestione classifica e partite di EA Sports FC 2026 per i colleghi di Neten con punti (+3 tempo regolare, +2 ai rigori, 0 sconfitta) e statistiche dettagliate.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
